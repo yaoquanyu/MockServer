@@ -2,8 +2,6 @@ package com.coders.democrazy.server.client;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -15,10 +13,11 @@ import org.springframework.web.client.RestTemplate;
 
 import com.coders.democrazy.server.model.Greeting;
 
-@Component
-public class ServerDiscoveryClient {
+import lombok.extern.slf4j.Slf4j;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServerDiscoveryClient.class);
+@Component
+@Slf4j
+public class ServerDiscoveryClient {
 	
 	@Autowired
 	private DiscoveryClient discoveryClient;
@@ -30,7 +29,7 @@ public class ServerDiscoveryClient {
 			List<ServiceInstance> instances = discoveryClient.getInstances("client");
 			
 			if (instances.size() == 0) {
-				LOGGER.error("Cannot find any instance");
+				log.error("Cannot find any instance");
 				return new ResponseEntity<Greeting>(HttpStatus.NOT_FOUND);
 			}
 			
@@ -40,7 +39,7 @@ public class ServerDiscoveryClient {
 			
 			return restExchange;
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			log.error(e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

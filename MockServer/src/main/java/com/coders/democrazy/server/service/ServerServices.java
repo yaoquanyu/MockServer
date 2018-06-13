@@ -1,7 +1,5 @@
 package com.coders.democrazy.server.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,7 +9,10 @@ import com.coders.democrazy.server.client.ServerFeignClient;
 import com.coders.democrazy.server.client.ServerRestClient;
 import com.coders.democrazy.server.model.Greeting;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ServerServices {
 
 	@Autowired
@@ -23,24 +24,25 @@ public class ServerServices {
 	@Autowired
 	ServerRestClient restClient;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServerServices.class);
-	
 	public ResponseEntity<Greeting> greetingToClient(String type, String name) {
-		ResponseEntity<Greeting> reponse = null;
+		ResponseEntity<Greeting> response = null;
 		
 		switch (type) {
 			case "discovery":
-				reponse = discoveryClient.getDiscoveryGreeting(type, name);
+				response = discoveryClient.getDiscoveryGreeting(type, name);
+				log.info("Got discover client response.");
 				break;
 			case "feign":
-				reponse = feignClient.getFeignGreeting(type, name);
+				response = feignClient.getFeignGreeting(type, name);
+				log.info("Got feign client response");
 				break;
 			case "rest":
-				reponse = restClient.getRestGreeting(type, name);
+				response = restClient.getRestGreeting(type, name);
+				log.info("Got rest client response");
 				break;
 			default:
 				break;
 		}
-		return reponse;
+		return response;
 	}
 }
