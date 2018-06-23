@@ -1,0 +1,20 @@
+version: '2'
+services:
+  eureka:
+    image:  eureka:demo
+    ports:
+      - "8761:8761"
+  server:
+    image:  server:demo
+    ports: 
+      - "8083:8083"
+    environment:
+      EUREKASERVER_URI: "http://eureka:8761/eureka/"
+      EUREKASERVER_PORT:   "8761"
+  client:
+    image:  client:demo
+    ports: 
+      - "8085:8085"
+    environment:
+      EUREKASERVER_URI: "http://eureka:8761/eureka/"
+      EUREKASERVER_PORT:   "8761"
