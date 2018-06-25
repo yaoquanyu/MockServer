@@ -7,4 +7,4 @@ java -Dserver.port=8761														\
 	 -Deureka.client.fetchRegistry=false									\
 	 -Deureka.server.waitTimeInMsWhenSyncEmpty=0							\
 	 -Deureka.serviceUrl.defaultZone=http://localhost:8761           		\
-     -jar /usr/local/eureka/@project.build.finalName@.jar
+     -jar /usr/local/mockeureka/@project.build.finalName@.jar

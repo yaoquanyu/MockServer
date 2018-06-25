@@ -15,7 +15,7 @@ public class ServerRestClient {
 	RestTemplate restTemplate;
 	
 	public ResponseEntity<Greeting> getRestGreeting(String type, String name) {
-		return restTemplate.exchange("http://localhost:8085/greeting/{type}/{name}", HttpMethod.GET, 
+		return restTemplate.exchange("http://client:8085/greeting/{type}/{name}", HttpMethod.GET,
 				null, Greeting.class, type, name);
 	}
 }

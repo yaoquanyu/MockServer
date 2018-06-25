@@ -2,9 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.coders.democrazy</groupId>
 	<artifactId>MockEureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,7 +18,7 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>com.coders.democrazy.eureka.EurekaApplication</start-class>
-		<docker.image.name>eureka</docker.image.name>
+		<docker.image.name>mockeureka</docker.image.name>
 		<docker.image.tag>demo</docker.image.tag>
 
 	</properties>
@@ -46,8 +48,7 @@
 	</dependencies>
 	<build>
 		<plugins>
-			<!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts 
-				actual JAR filename -->
+			<!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts actual JAR filename -->
 			<!-- The final Dockerfile will be created in target/dockerfile/Dockerfile -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>

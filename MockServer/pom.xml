@@ -18,7 +18,7 @@
 		<spring-restdocs-mockmvc.version>2.0.0.RELEASE</spring-restdocs-mockmvc.version>
 		<docker.image.name>server</docker.image.name>
 		<docker.image.tag>demo</docker.image.tag>
-		
+
 	</properties>
 
 	<dependencyManagement>
@@ -60,10 +60,8 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+			<!-- We use the Resources plugin to filer Dockerfile and run.sh, it inserts actual JAR filename -->
+			<!-- The final Dockerfile will be created in target/dockerfile/Dockerfile -->
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
@@ -102,7 +100,10 @@
 					</resources>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
 
